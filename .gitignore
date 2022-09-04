@@ -1,0 +1,6 @@
+*.swp
+*teste.js
+ask-resources.json
+.ask
+.vscode
+lambda/node_modules
