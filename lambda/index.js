@@ -10,7 +10,7 @@ const LaunchRequestHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const speakOutput = 'Seja bem vindo ao Mestre Sabe';
+        const speakOutput = 'Seja bem vindo ao Mestre Sabe, pergunte qualquer coisa';
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -25,12 +25,15 @@ const AskMeIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AskMeIntent';
     },
     handle(handlerInput) {
-        const speakOutput = 'Olá, tudo bem!';
+      const query = handlerInput.requestEnvelope.request.intent
+      console.log('debug fabio')
+      console.log(query)
+      const speakOutput = 'Olá, tudo bem!';
 
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
-            .getResponse();
+      return handlerInput.responseBuilder
+        .speak(speakOutput)
+        //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
+        .getResponse();
     }
 };
 
