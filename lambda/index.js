@@ -57,7 +57,7 @@ const AskMeIntentHandler = {
       console.log(speakOutput)
 
       return handlerInput.responseBuilder
-        .speak(speakOutput)
+        .speak(speakOutput.replace(/^[^a-zA-Z0-9]*/, ''))
         .reprompt('Mais algum pedido?')
         .getResponse()
     }
