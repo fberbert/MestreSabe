@@ -46,6 +46,13 @@ const AskMeIntentHandler = {
         return(response.data.choices[0].text)
       }
 
+      // sair se responder não
+      if ( query.match(/(não|no|nao)/) ) {
+        return handlerInput.responseBuilder
+          .speak('Até a próxima!')
+          .getResponse()
+      }
+
       const speakOutput = await askOpenAi(query)
       console.log(speakOutput)
 
