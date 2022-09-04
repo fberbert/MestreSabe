@@ -47,7 +47,7 @@ const AskMeIntentHandler = {
       }
 
       // sair se responder não
-      if ( query.match(/(não|no|nao)/) ) {
+      if ( query.match(/(não|no|nao)/) && query.length < 5 ) {
         return handlerInput.responseBuilder
           .speak('Até a próxima!')
           .getResponse()
