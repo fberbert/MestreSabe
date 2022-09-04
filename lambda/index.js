@@ -24,11 +24,29 @@ const AskMeIntentHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AskMeIntent'
     },
-    handle(handlerInput) {
+    async handle(handlerInput) {
+      const { Configuration, OpenAIApi } = require("openai")
+      const configuration = new Configuration({
+        apiKey: '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',
+      });
+      const openai = new OpenAIApi(configuration)
+
       const query = handlerInput.requestEnvelope.request.intent.slots.askme.value
-      console.log('debug fabio')
-      console.log(query)
-      const speakOutput = query
+
+      const askOpenAi = async (query) => {
+        const response = await openai.createCompletion({
+          model: "text-davinci-002",
+          prompt: query,
+          temperature: 0,
+          max_tokens: 200,
+          top_p: 1,
+          frequency_penalty: 0.0,
+          presence_penalty: 0.0
+        })
+        return(response.data.choices[0].text)
+      }
+
+      const speakOutput = await askOpenAi(query)
 
       return handlerInput.responseBuilder
         .speak(speakOutput)
