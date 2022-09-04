@@ -22,20 +22,20 @@ const LaunchRequestHandler = {
 const AskMeIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AskMeIntent';
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AskMeIntent'
     },
     handle(handlerInput) {
-      const query = handlerInput.requestEnvelope.request.intent
+      const query = handlerInput.requestEnvelope.request.intent.slots.askme.value
       console.log('debug fabio')
       console.log(query)
-      const speakOutput = 'Olá, tudo bem!';
+      const speakOutput = query
 
       return handlerInput.responseBuilder
         .speak(speakOutput)
         //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
-        .getResponse();
+        .getResponse()
     }
-};
+}
 
 const HelpIntentHandler = {
     canHandle(handlerInput) {

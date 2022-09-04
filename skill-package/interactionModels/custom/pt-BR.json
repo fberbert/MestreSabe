@@ -1,39 +1,38 @@
 {
-  "interactionModel": {
-    "languageModel": {
-      "invocationName": "mestre sabe",
-      "intents": [
-        {
-          "name": "AMAZON.CancelIntent",
-          "samples": []
-        },
-        {
-          "name": "AMAZON.HelpIntent",
-          "samples": []
-        },
-        {
-          "name": "AMAZON.StopIntent",
-          "samples": []
-        },
-        {
-          "name": "AMAZON.NavigateHomeIntent",
-          "samples": []
-        },
-        {
-          "name": "AskMeIntent",
-          "slots": [
-            {
-              "name": "askme",
-              "type": "AMAZON.SearchQuery"
-            }
-          ],
-          "samples": [
-            "oi"
-          ]
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "mestre sabe",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AskMeIntent",
+                    "slots": [
+                        {
+                            "name": "askme",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        " {askme} "
+                    ]
+                }
+            ],
+            "types": []
         }
-      ],
-      "types": []
     }
-  },
-  "version": "3"
 }
