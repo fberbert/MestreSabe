@@ -36,7 +36,7 @@ const AskMeIntentHandler = {
       const askOpenAi = async (query) => {
         try {
           const response = await openai.createCompletion({
-            model: "text-davinci-002",
+            model: "text-davinci-003",
             prompt: query,
             temperature: 0,
             max_tokens: 500,
