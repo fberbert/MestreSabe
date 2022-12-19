@@ -10,29 +10,26 @@ const LaunchRequestHandler = {
     return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest'
   },
   handle(handlerInput) {
-    const speakOutput = 'Seja bem vindo ao Mestre Sabe, pergunte qualquer coisa'
+    const speakOutput = 'Seja bem vindo ao Mestre Sabe'
 
     return handlerInput.responseBuilder
       .speak(speakOutput)
       .reprompt(speakOutput)
-      .addElicitSlotDirective('askme', 'AskMeIntentHandler')
+      .addElicitSlotDirective('askme', 'AskMeGetValueIntentHandler')
       .getResponse()
   }
-};
+}
 
-      // && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AskMeIntent'
 const AskMeGetValueIntentHandler = {
   canHandle(handlerInput) {
-    return (
-        Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-        || Alexa.getRequestType(handlerInput.requestEnvelope) === 'LauncherRequest'
-    )
+    return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+      && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AskMeIntent'
       && !handlerInput.requestEnvelope.request.intent.slots.askme.value
   },
   handle(handlerInput) {
     return handlerInput.responseBuilder
       .speak('Pergunte o que quiser')
-      .reprompt()
+      .reprompt('Pergunte o que quiser')
       .addElicitSlotDirective('askme')
       .getResponse()
   }
