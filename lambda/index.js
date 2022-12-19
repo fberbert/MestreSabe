@@ -6,23 +6,27 @@
 const Alexa = require('ask-sdk-core');
 
 const LaunchRequestHandler = {
-    canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
-    },
-    handle(handlerInput) {
-        const speakOutput = 'Seja bem vindo ao Mestre Sabe';
+  canHandle(handlerInput) {
+    return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
+  },
+  handle(handlerInput) {
+    const speakOutput = 'Seja bem vindo ao Mestre Sabe, pergunte qualquer coisa';
 
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(speakOutput)
-            .getResponse();
-    }
+    return handlerInput.responseBuilder
+      .speak(speakOutput)
+      .reprompt(speakOutput)
+      .addElicitSlotDirective('askme')
+      .getResponse();
+  }
 };
 
+      // && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AskMeIntent'
 const AskMeGetValueIntentHandler = {
   canHandle(handlerInput) {
-    return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-      && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AskMeIntent'
+    return (
+        Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+        || Alexa.getRequestType(handlerInput.requestEnvelope) === 'LauncherRequest'
+    )
       && !handlerInput.requestEnvelope.request.intent.slots.askme.value
   },
   handle(handlerInput) {
