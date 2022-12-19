@@ -15,7 +15,7 @@ const LaunchRequestHandler = {
     return handlerInput.responseBuilder
       .speak(speakOutput)
       .reprompt(speakOutput)
-      .addElicitSlotDirective('askme', 'AskMeGetValueIntentHandler')
+      .addElicitSlotDirective('askme', 'AskMeIntent')
       .getResponse()
   }
 }
