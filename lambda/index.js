@@ -10,7 +10,7 @@ const LaunchRequestHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const speakOutput = 'Seja bem vindo ao Mestre Sabe, pergunte qualquer coisa';
+        const speakOutput = 'Seja bem vindo ao Mestre Sabe';
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -19,55 +19,72 @@ const LaunchRequestHandler = {
     }
 };
 
+const AskMeGetValueIntentHandler = {
+  canHandle(handlerInput) {
+    return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+      && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AskMeIntent'
+      && !handlerInput.requestEnvelope.request.intent.slots.askme.value
+  },
+  handle(handlerInput) {
+    return handlerInput.responseBuilder
+      .speak('Pergunte o que quiser')
+      .reprompt()
+      .addElicitSlotDirective('askme')
+      .getResponse()
+  }
+}
+
 const AskMeIntentHandler = {
-    canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AskMeIntent'
-    },
-    async handle(handlerInput) {
-      const { Configuration, OpenAIApi } = require("openai")
-      const configuration = new Configuration({
-        apiKey: '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',
-      });
-      const openai = new OpenAIApi(configuration)
+  canHandle(handlerInput) {
+    return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+      && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AskMeIntent'
+      && handlerInput.requestEnvelope.request.intent.slots.askme.value
+  },
+  async handle(handlerInput) {
+    const { Configuration, OpenAIApi } = require("openai")
+    const configuration = new Configuration({
+      apiKey: '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',
+    });
+    const openai = new OpenAIApi(configuration)
 
-      const query = handlerInput.requestEnvelope.request.intent.slots.askme.value
+    const query = handlerInput.requestEnvelope.request.intent.slots.askme.value
 
-      const askOpenAi = async (query) => {
-        try {
-          const response = await openai.createCompletion({
-            model: "text-davinci-003",
-            prompt: query,
-            temperature: 0.7,
-            max_tokens: 500,
-            top_p: 1,
-            frequency_penalty: 0.0,
-            presence_penalty: 0.0
-          })
-          if ( response.data.choices.length === 0 )
-            return 'Estou com preguiça de responder essa pergunta'
-          else
-            return response.data.choices[0].text
-        } catch (err) {
+    // function askOpenAi, retorna a resposta da openAI
+    const askOpenAi = async (query) => {
+      try {
+        const response = await openai.createCompletion({
+          model: "text-davinci-003",
+          prompt: query,
+          temperature: 0.7,
+          max_tokens: 500,
+          top_p: 1,
+          frequency_penalty: 0.0,
+          presence_penalty: 0.0
+        })
+        if ( response.data.choices.length === 0 )
           return 'Estou com preguiça de responder essa pergunta'
-        }
+        else
+          return response.data.choices[0].text
+      } catch (err) {
+        return 'Estou com preguiça de responder essa pergunta'
       }
+    }
+    // fim function
 
-      // sair se responder não
-      if ( query.match(/(não|no|nao)/) && query.length < 5 ) {
-        return handlerInput.responseBuilder
-          .speak('Até a próxima!')
-          .getResponse()
-      }
-
-      const speakOutput = await askOpenAi(query)
-      console.log(speakOutput)
-
+    // sair se responder não
+    if ( query.match(/(não|no|nao)/) && query.length < 5 ) {
       return handlerInput.responseBuilder
-        .speak(speakOutput.replace(/^[^a-zA-Z0-9]*/, ''))
-        .reprompt('Mais algum pedido?')
+        .speak('Até a próxima!')
         .getResponse()
     }
+
+    const speakOutput = await askOpenAi(query)
+
+    return handlerInput.responseBuilder
+      .speak(speakOutput.replace(/^[^a-zA-Z0-9]*/, ''))
+      .reprompt('Mais algum pedido?')
+      .getResponse()
+  }
 }
 
 const HelpIntentHandler = {
@@ -181,6 +198,7 @@ exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
         AskMeIntentHandler,
+        AskMeGetValueIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         FallbackIntentHandler,
