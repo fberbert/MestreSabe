@@ -10,12 +10,11 @@ const LaunchRequestHandler = {
     return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest'
   },
   handle(handlerInput) {
-    const speakOutput = 'Seja bem vindo ao Mestre Sabe'
+    const speakOutput = 'Seja bem vindo ao Mestre Sabe, pergunte qualquer coisa'
 
     return handlerInput.responseBuilder
       .speak(speakOutput)
       .reprompt(speakOutput)
-      .addElicitSlotDirective('askme', 'AskMeIntent')
       .getResponse()
   }
 }
@@ -28,8 +27,8 @@ const AskMeGetValueIntentHandler = {
   },
   handle(handlerInput) {
     return handlerInput.responseBuilder
-      .speak('Pergunte o que quiser')
-      .reprompt('Pergunte o que quiser')
+      .speak('Faça uma pergunta')
+      .reprompt('Faça uma pergunta')
       .addElicitSlotDirective('askme')
       .getResponse()
   }
