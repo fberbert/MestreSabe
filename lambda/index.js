@@ -3,20 +3,20 @@
  * Please visit https://alexa.design/cookbook for additional examples on implementing slots, dialog management,
  * session persistence, api calls, and more.
  * */
-const Alexa = require('ask-sdk-core');
+const Alexa = require('ask-sdk-core')
 
 const LaunchRequestHandler = {
   canHandle(handlerInput) {
-    return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
+    return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest'
   },
   handle(handlerInput) {
-    const speakOutput = 'Seja bem vindo ao Mestre Sabe, pergunte qualquer coisa';
+    const speakOutput = 'Seja bem vindo ao Mestre Sabe, pergunte qualquer coisa'
 
     return handlerInput.responseBuilder
       .speak(speakOutput)
       .reprompt(speakOutput)
-      .addElicitSlotDirective('askme')
-      .getResponse();
+      .addElicitSlotDirective('askme', 'AskMeIntentHandler')
+      .getResponse()
   }
 };
 
