@@ -9,6 +9,7 @@
  *
  * */
 const Alexa = require('ask-sdk-core')
+const { askOpenAi } = require('./functions')
 
 const LaunchRequestHandler = {
   canHandle(handlerInput) {
@@ -19,7 +20,6 @@ const LaunchRequestHandler = {
 
     return handlerInput.responseBuilder
       .speak(speakOutput)
-      .reprompt(speakOutput)
       .getResponse()
   }
 }
@@ -46,40 +46,13 @@ const AskMeIntentHandler = {
       && handlerInput.requestEnvelope.request.intent.slots.askme.value
   },
   async handle(handlerInput) {
-    const { Configuration, OpenAIApi } = require("openai")
-    const configuration = new Configuration({
-      apiKey: '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',
-    })
-    const openai = new OpenAIApi(configuration)
 
     const query = handlerInput.requestEnvelope.request.intent.slots.askme.value
-
-    // function askOpenAi, retorna a resposta da openAI
-    const askOpenAi = async (query) => {
-      try {
-        const response = await openai.createCompletion({
-          model: "text-davinci-003",
-          prompt: query,
-          temperature: 0.7,
-          max_tokens: 500,
-          top_p: 1,
-          frequency_penalty: 0.0,
-          presence_penalty: 0.0
-        })
-        if ( response.data.choices.length === 0 )
-          return 'Estou com preguiça de responder essa pergunta'
-        else
-          return response.data.choices[0].text
-      } catch (err) {
-        return 'Estou com preguiça de responder essa pergunta'
-      }
-    }
-    // fim function
-
     // sair se responder não
     if ( query.match(/(não|no|nao)/) && query.length < 5 ) {
       return handlerInput.responseBuilder
         .speak('Até a próxima!')
+        .withShoudEndSession(true)
         .getResponse()
     }
 
@@ -128,7 +101,7 @@ const FallbackIntentHandler = {
       && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.FallbackIntent'
   },
   handle(handlerInput) {
-    const speakOutput = 'Sorry, I don\'t know about that. Please try again.'
+    const speakOutput = 'Não sei nada sobre isso. Tente novamente.'
 
     return handlerInput.responseBuilder
       .speak(speakOutput)
