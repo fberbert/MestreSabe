@@ -9,7 +9,7 @@ const askOpenAi = async (query) => {
 
     query = `
       ${query}. Seja o mais objetivo possível, produzindo 
-      uma resposta de no máximo 100 palavras
+      sua resposta em apenas uma frase.
       `
     const response = await openai.createCompletion({
       model: "text-davinci-003",
