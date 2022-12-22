@@ -28,44 +28,12 @@
                         }
                     ],
                     "samples": [
-                        "iniciar"
+                        "dfddgffd",
+                        " {askme} "
                     ]
                 }
             ],
             "types": []
-        },
-        "dialog": {
-            "intents": [
-                {
-                    "name": "AskMeIntent",
-                    "delegationStrategy": "SKILL_RESPONSE",
-                    "confirmationRequired": false,
-                    "prompts": {},
-                    "slots": [
-                        {
-                            "name": "askme",
-                            "type": "AMAZON.SearchQuery",
-                            "confirmationRequired": false,
-                            "elicitationRequired": true,
-                            "prompts": {
-                                "elicitation": "Elicit.Slot.104448582661.853637404899"
-                            }
-                        }
-                    ]
-                }
-            ],
-            "delegationStrategy": "ALWAYS"
-        },
-        "prompts": [
-            {
-                "id": "Elicit.Slot.104448582661.853637404899",
-                "variations": [
-                    {
-                        "type": "PlainText",
-                        "value": "Pergunte qualquer coisa"
-                    }
-                ]
-            }
-        ]
+        }
     }
 }
