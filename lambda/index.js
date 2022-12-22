@@ -57,7 +57,9 @@ const AskMeIntentHandler = {
     }
 
     let speakOutput = await askOpenAi(query)
-    speakOutput = speakOutput.replace(/^[\W]*/, '') + '. Mais alguma pergunta?'
+    speakOutput = speakOutput
+      .replace(/^[\W]*/, '')
+      .replace(/^Resposta:/i, '') + '. Mais alguma pergunta?'
 
     return handlerInput.responseBuilder
       .speak(speakOutput)
