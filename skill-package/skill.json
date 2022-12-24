@@ -1,48 +1,82 @@
 {
   "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "pt-BR": {
+          "summary": "Pergunte o que quiser",
+          "examplePhrases": [
+            "Alexa abra Mestre Sabe",
+            "Mestre Sabe",
+            "Pergunte ao Mestre Sabe os números da MegaSena"
+          ],
+          "keywords": [
+            "óracle",
+            "mestre",
+            "sabe",
+            "tudo",
+            "conhecimento",
+            "variedades"
+          ],
+          "name": "Mestre Sabe",
+          "description": "Faça qualquer pergunta ou fale alguma coisa. Usarei minhas habilidades em conhecimentos gerais para lhe responder.",
+          "smallIconUri": "file://assets/images/pt-BR_smallIconUri.png",
+          "largeIconUri": "file://assets/images/pt-BR_largeIconUri.png"
+        }
+      },
+      "automaticDistribution": {
+        "sourceLocaleForLanguages": [
+          {
+            "sourceLocale": "pt-BR",
+            "language": "pt"
+          }
+        ],
+        "isActive": true
+      },
+      "isAvailableWorldwide": true,
+      "testingInstructions": "Pergunte ou fale alguma coisa, use linguagem natural.",
+      "category": "KNOWLEDGE_AND_TRIVIA",
+      "distributionMode": "PUBLIC",
+      "distributionCountries": []
+    },
     "apis": {
       "custom": {
         "endpoint": {
-          "uri": "arn:aws:lambda:us-east-1:356326258486:function:149217dd-daee-41c4-a4c8-bd47d06ebfef:Release_0"
+          "uri": "arn:aws:lambda:us-east-1:356326258486:function:149217dd-daee-41c4-a4c8-bd47d06ebfef:Release_1"
         },
         "interfaces": [],
         "regions": {
-          "NA": {
-            "endpoint": {
-              "uri": "arn:aws:lambda:us-east-1:356326258486:function:149217dd-daee-41c4-a4c8-bd47d06ebfef:Release_0"
-            }
-          },
           "EU": {
             "endpoint": {
-              "uri": "arn:aws:lambda:eu-west-1:356326258486:function:149217dd-daee-41c4-a4c8-bd47d06ebfef:Release_0"
+              "uri": "arn:aws:lambda:eu-west-1:356326258486:function:149217dd-daee-41c4-a4c8-bd47d06ebfef:Release_1"
+            }
+          },
+          "NA": {
+            "endpoint": {
+              "uri": "arn:aws:lambda:us-east-1:356326258486:function:149217dd-daee-41c4-a4c8-bd47d06ebfef:Release_1"
             }
           },
           "FE": {
             "endpoint": {
-              "uri": "arn:aws:lambda:us-west-2:356326258486:function:149217dd-daee-41c4-a4c8-bd47d06ebfef:Release_0"
+              "uri": "arn:aws:lambda:us-west-2:356326258486:function:149217dd-daee-41c4-a4c8-bd47d06ebfef:Release_1"
             }
           }
         }
       }
     },
     "manifestVersion": "1.0",
-    "publishingInformation": {
-      "distributionCountries": [],
-      "isAvailableWorldwide": true,
+    "privacyAndCompliance": {
+      "allowsPurchases": false,
       "locales": {
-        "pt-BR": {
-          "description": "Sample Full Description",
-          "examplePhrases": [
-            "Alexa abra olá mundo",
-            "olá",
-            "ajuda"
-          ],
-          "keywords": [],
-          "name": "Mestre Sabe",
-          "summary": "Sample Short Description"
-        }
+        "pt-BR": {}
       },
-      "testingInstructions": "Sample Testing Instructions."
+      "containsAds": false,
+      "isExportCompliant": true,
+      "isChildDirected": false,
+      "shoppingKit": {
+        "isShoppingActionsEnabled": false,
+        "isAmazonAssociatesOnAlexaEnabled": false
+      },
+      "usesPersonalInfo": false
     }
   }
 }

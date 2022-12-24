@@ -1,9 +1,12 @@
+// dotenv para separar API_KEY em arquivo oculto
+require('dotenv').config()
+
 // function askOpenAi, retorna a resposta da openAI
 const askOpenAi = async (query) => {
   try {
     const { Configuration, OpenAIApi } = require("openai")
     const configuration = new Configuration({
-      apiKey: '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',
+      apiKey: process.env.API_KEY,
     })
     const openai = new OpenAIApi(configuration)
 
