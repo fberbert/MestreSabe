@@ -24,10 +24,17 @@ const askOpenAi = async (query) => {
       presence_penalty: 0.0
     })
 
-    if ( response.data.choices.length === 0 )
+    if ( response.data.choices.length === 0 ) {
       return 'Estou com preguiça de responder essa pergunta'
-    else
-      return response.data.choices[0].text
+    } else {
+      let r = response.data.choices[0].text
+      return r
+        .replace(/^\W+|\W+$/g, "") // remover trailing do inicio e fim
+        .replace(/^possível/, 'É possível')
+        .replace(/^r:/i, '')
+        .replace(/^resposta:/i, '')
+        .replace(/[\'\"]/g, '')
+    }
 
   } catch (err) {
     return 'Estou com preguiça de responder essa pergunta'
