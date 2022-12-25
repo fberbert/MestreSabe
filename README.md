@@ -2,6 +2,7 @@
 Skill para Alexa que, integrada à engine de IA text-davinci-03, responde sobre qualquer coisa.
 
 "*Alexa, Mestre Sabe*"
+
 "*Alexa, pergunte ao Mestre Sabe um remédio para dor de cabeça*"
 
 ## Requisitos
