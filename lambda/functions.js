@@ -1,6 +1,15 @@
 // dotenv para separar API_KEY em arquivo oculto
 require('dotenv').config()
 
+// function para processar a resposta do openAI
+const parseAnswer = (text) => 
+  text
+    .replace(/^\W+|\W+$/g, "") // remover trailing do inicio e fim
+    .replace(/^(r: |r:)/i, '')
+    .replace(/^(resposta: |resposta:)/i, '')
+    .replace(/^possível/, 'É possível')
+    .replace(/[\'\"]/g, '')
+
 // function askOpenAi, retorna a resposta da openAI
 const askOpenAi = async (query) => {
   try {
@@ -27,13 +36,7 @@ const askOpenAi = async (query) => {
     if ( response.data.choices.length === 0 ) {
       return 'Estou com preguiça de responder essa pergunta'
     } else {
-      let r = response.data.choices[0].text
-      return r
-        .replace(/^\W+|\W+$/g, "") // remover trailing do inicio e fim
-        .replace(/^possível/, 'É possível')
-        .replace(/^r:/i, '')
-        .replace(/^resposta:/i, '')
-        .replace(/[\'\"]/g, '')
+      return parseAnswer(response.data.choices[0].text)
     }
 
   } catch (err) {

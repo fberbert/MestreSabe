@@ -1,12 +1,12 @@
 {
-  "name": "hello-world",
-  "version": "1.2.0",
-  "description": "alexa utility for quickly building skills",
+  "name": "mestre-sabe",
+  "version": "0.3.0",
+  "description": "Mestre Sabe, skill para Alexa",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Amazon Alexa",
+  "author": "Fábio Berbert de Paula",
   "license": "Apache License",
   "dependencies": {
     "ask-sdk-core": "^2.7.0",
